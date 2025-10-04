@@ -1,0 +1,137 @@
+/* 
+ * PolyTube - Dark theme inspired by dripit.io
+ */
+
+ @tailwind base;
+ @tailwind components;
+ @tailwind utilities;
+ 
+ @layer base {
+  :root {
+    /* Dark theme inspired by dripit.io */
+    --background: 229 33% 11%;  /* #1A1A2E - Deep dark blue */
+    --foreground: 0 0% 98%;     /* Nearly white text */
+    
+    /* Component colors - Dark with subtle blue tint */
+    --card: 229 28% 15%;        /* Slightly lighter than background */
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 229 28% 15%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 168 76% 76%;      /* Light green accent #A8E6CE */
+    --primary-foreground: 229 33% 11%;
+    
+    --secondary: 270 50% 85%;    /* Light purple #E1BEE7 */
+    --secondary-foreground: 229 33% 11%;
+    
+    --muted: 229 20% 20%;
+    --muted-foreground: 0 0% 60%;
+    
+    --accent: 195 100% 50%;      /* Blue #00BFFF */
+    --accent-foreground: 0 0% 98%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Border and input - Subtle dark borders */
+    --border: 229 20% 25%;
+    --input: 229 20% 20%;
+    --ring: 168 76% 76%;
+    
+    /* Link colors */
+    --link: 168 76% 76%;
+    --link-hover: 168 76% 85%;
+    
+    /* Button - Vibrant on dark */
+    --button: 168 76% 76%;
+    --button-foreground: 229 33% 11%;
+    --button-border: 168 76% 76%;
+    --button-hover: 168 76% 85%;
+    --button-hover-foreground: 229 33% 11%;
+    --button-hover-border: 168 76% 85%;
+    --button-ring: 168 76% 76%;
+    
+    /* Chart - Vibrant colors */
+    --chart-1: 168 76% 76%;  /* Green */
+    --chart-2: 270 50% 85%;  /* Purple */
+    --chart-3: 195 100% 50%; /* Blue */
+    --chart-4: 40 100% 65%;  /* Orange */
+    --chart-5: 330 80% 70%;  /* Pink */
+    
+    /* Sidebar - Dark with subtle distinction */
+    --sidebar-background: 229 33% 11%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 168 76% 76%;
+    --sidebar-primary-foreground: 229 33% 11%;
+    --sidebar-accent: 229 28% 15%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 229 20% 25%;
+    --sidebar-ring: 168 76% 76%;
+    
+    /* Fixed values */
+    --radius: 0.75rem;  /* More rounded for modern look */
+  }
+}
+ 
+/* Ensure body has no layout spacing that react-remove-scroll can convert */
+html, body { margin: 0; }
+
+/* App chrome layout */
+:root {
+  --preview-h: 48px;
+  --warn-h: 40px;
+}
+
+#app-shell { min-height: 100vh; }
+
+/* Reserve space for the fixed bars on the WRAPPER, not body */
+#app-shell.with-preview.with-warning { padding-top: calc(var(--preview-h) + var(--warn-h)); }
+#app-shell.with-preview:not(.with-warning) { padding-top: var(--preview-h); }
+#app-shell.with-warning:not(.with-preview) { padding-top: var(--warn-h); }
+
+/* Bars are truly fixed */
+.poof-preview-bar,
+.poof-integration-warning-bar {
+  position: fixed;
+  left: 0; right: 0;
+  z-index: 10000;
+}
+
+/* Preview bar at top */
+.poof-preview-bar {
+  top: 0;
+  height: var(--preview-h);
+}
+
+/* Warning bar sits below preview if present, else at top */
+.poof-integration-warning-bar {
+  top: 0;
+  height: var(--warn-h);
+}
+#app-shell.with-preview .poof-integration-warning-bar {
+  top: var(--preview-h);
+}
+
+/* Optional: if anything ever still toggles scroll-lock, keep our spacing stable */
+body[data-scroll-locked] { padding-top: 0 !important; }
+
+/* Subtle network indicator animation */
+@keyframes subtle-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+/* Progress bar animation */
+@keyframes progress-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
